@@ -3,18 +3,20 @@ package task2;
 public class StaticMethod {
 
     public static void signIn(String login, String password, String confirmPassword) throws WrongLoginException, WrongPasswordException{
-        if(login.length()>20){
+        boolean boolLogin;
+        boolean boolPassword;
+        if(login.length()>20) {
             String massage = "Login > 20";
-            throw new WrongLoginException(massage);
-        }else{
-            System.out.println("Ok");
-        }
-        if(password.length()>20){
+            boolLogin = false;
+            throw new WrongLoginException(massage, boolLogin);
+        }else if(password.length()>20){
             String massagepassword = "Password > 20";
-            throw new WrongPasswordException(massagepassword);
-        }else if(!password.equals(confirmPassword)){
+            boolPassword = false;
+            throw new WrongPasswordException(massagepassword, boolPassword);
+        }else if(!password.equals(confirmPassword)) {
             String massagepassword = "Password != confirmPassword";
-            throw new WrongPasswordException(massagepassword);
+            boolPassword = false;
+            throw new WrongPasswordException(massagepassword, boolPassword);
         }else{
             System.out.println("OK");
         }
@@ -23,7 +25,8 @@ public class StaticMethod {
             try {
                 int value = Integer.valueOf(number[i]);
                 String massage = "Есть число";
-                throw new WrongPasswordException(massage);
+                boolPassword = true;
+                throw new WrongPasswordException(massage, boolPassword);
             }catch (NumberFormatException e){
                 e.getMessage();
             }
